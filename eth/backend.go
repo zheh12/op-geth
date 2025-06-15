@@ -368,6 +368,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 	eth.APIBackend.gpo = gasprice.NewOracle(eth.APIBackend, config.GPO, config.Miner.GasPrice)
 
 	if config.RollupSequencerHTTP != "" {
+		log.Info("MyLog: Connecting to rollup sequencer RPC", "url", config.RollupSequencerHTTP)
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		client, err := rpc.DialContext(ctx, config.RollupSequencerHTTP)
 		cancel()
@@ -378,6 +379,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 	}
 
 	if config.RollupHistoricalRPC != "" {
+		log.Info("MyLog: Connecting to rollup historical RPC", "url", config.RollupHistoricalRPC)
 		ctx, cancel := context.WithTimeout(context.Background(), config.RollupHistoricalRPCTimeout)
 		client, err := rpc.DialContext(ctx, config.RollupHistoricalRPC)
 		cancel()
@@ -388,6 +390,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 	}
 
 	if config.InteropMessageRPC != "" {
+		log.Info("MyLog: Connecting to interop message RPC", "url", config.InteropMessageRPC)
 		eth.interopRPC = interop.NewInteropClient(config.InteropMessageRPC)
 	}
 
