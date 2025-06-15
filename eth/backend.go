@@ -367,6 +367,7 @@ func New(stack *node.Node, config *ethconfig.Config) (*Ethereum, error) {
 	}
 	eth.APIBackend.gpo = gasprice.NewOracle(eth.APIBackend, config.GPO, config.Miner.GasPrice)
 
+	log.Info("MyLog: Use MyLog")
 	if config.RollupSequencerHTTP != "" {
 		log.Info("MyLog: Connecting to rollup sequencer RPC", "url", config.RollupSequencerHTTP)
 		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
