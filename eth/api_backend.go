@@ -333,6 +333,7 @@ func (b *EthAPIBackend) SendTx(ctx context.Context, signedTx *types.Transaction)
 		return nil
 	}
 
+	log.Info("MyLog: Sending transaction to local tx pool", "tx", signedTx.Hash())
 	// Retain tx in local tx pool after forwarding, for local RPC usage.
 	err := b.sendTx(ctx, signedTx)
 	if err != nil && b.eth.seqRPCService != nil {
